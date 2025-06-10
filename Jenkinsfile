@@ -2,9 +2,18 @@ pipeline {
     agent any
     stages {
         stage('test') {
-          
-            steps ('test') {
+            steps {
                 sh('whoami')
+            }
+        }
+        stage('with docker') {
+            agent{
+                docker {
+                    image 'node:20-alpine'
+                }
+            }
+            steps {
+                sh('npm --version')
             }
         }
     }
