@@ -1,6 +1,12 @@
 pipeline {
     agent any
     stages {
+        stage('test') {
+          
+            steps ('test') {
+                sh('whoami')
+            }
+        }
         stage('Build') {
             agent{
                 docker {
