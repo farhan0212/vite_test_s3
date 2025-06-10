@@ -7,7 +7,7 @@ pipeline {
                     image 'node:lts-alpine'
                 }
             } 
-            step('test') {
+            steps ('test') {
                 sh('npm -v')
             }
         }
