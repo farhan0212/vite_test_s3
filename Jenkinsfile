@@ -14,7 +14,7 @@ pipeline {
                     host: env.SSH_HOST,
                     port: 22,
                     credentialsId: env.SSH_CREDENTIALS_ID,
-                    username: env.SSH_USERNAME
+                    user: env.SSH_USERNAME
                 ], command: 'ls -la'
             }
         }
