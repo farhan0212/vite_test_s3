@@ -11,10 +11,11 @@ pipeline {
             steps {
                 sshagent(credentials: [SSH_CREDENTIALS_ID]) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no ${SSH_USERNAME}@${SSH_HOST}<<EOF
+                       ssh -o StrictHostKeyChecking=no ${SSH_USERNAME}@${SSH_HOST} '
                         echo "Running commands on remote server"
                         ls -la
-                        EOF
+                        whoami
+                        '
                     """
                 }
             }
