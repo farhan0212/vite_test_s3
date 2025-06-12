@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SSH_KEY = credentials('github')
-        SSH_HOST = 159.223.95.88
+        SSH_HOST = '159.223.95.88'
     }
     stages {
         stage('Remote ssh') {
