@@ -9,10 +9,11 @@ pipeline {
     stages {
         stage('Remote ssh') {
             steps {
-                sshagent(credentials: '${SSH_CREDENTIALS_ID}') {
+                sshagent(credentials: [SSH_CREDENTIALS_ID]) {
                     sh """
                         ssh -o StrictHostKeyChecking=no ${SSH_USERNAME}@${SSH_HOST} << 'ENDSSH'
                         echo "Running commands on remote server"
+                        ls -la
                         ENDSSH
                     """
                 }
