@@ -9,14 +9,13 @@ pipeline {
     stages {
         stage('Remote ssh') {
             steps {
-                sshCommand remote:  [
-                    name: 'remote-server',
-                    host: env.SSH_HOST,
-                    port: 22,
-                    credentialsId: env.SSH_CREDENTIALS_ID,
-                    user: env.SSH_USERNAME,
-                    allowAnyHosts: true
-                ], command: 'ls -la'
+                sshagent(credentials: '${SSH_CREDENTIALS_ID}') {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no ${SSH_USERNAME}@${SSH_HOST} << 'ENDSSH'
+                        echo "Running commands on remote server"
+                        ENDSSH
+                    """
+                }
             }
         }
     }
