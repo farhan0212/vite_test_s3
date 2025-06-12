@@ -1,25 +1,19 @@
 pipeline {
     agent any
+
+    environment {
+        SSH_KEY = credentials('github')
+        SSH_HOST = 159.223.95.88
+    }
     stages {
-        stage('test') {
+        stage('Remote ssh') {
             steps {
-                sh('whoami')
-            }
-        }
-        stage('with docker') {
-            agent{
-                docker {
-                    image 'node:20-alpine'
-                }
-            }
-            steps {
-                sh '''
-                ls -la
-                node --version
-                npm cache clean --force
-                npm ci
-                npm run build
-                '''
+                sshCommand remote:  [
+                    host: env.SSH_HOST,
+                    port: 22,
+                    credentialsId: env.SSH_KEY,
+                    username: 'github'
+                ], command: 'ls -la'
             }
         }
     }
