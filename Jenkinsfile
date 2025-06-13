@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'docker-agent'
+    }
 
     // environment {
     //     SSH_CREDENTIALS_ID = '26dc69fa-f0a0-4c62-8f3d-2d76a25701b4'
@@ -11,12 +13,12 @@ pipeline {
 
     stages {
         stage('install and build'){
-            agent {
-                docker {
-                    image 'node:22-alpine'
-                    reuseNode true
-                }
-            }
+            // agent {
+            //     docker {
+            //         image 'node:22-alpine'
+            //         reuseNode true
+            //     }
+            // }
                 steps{
                     sh'''
                     npm install
